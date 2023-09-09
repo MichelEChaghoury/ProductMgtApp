@@ -1,0 +1,30 @@
+# Server Configuration
+server:
+  port: 9002
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+
+spring:
+  application:
+    name: ProductMgtQueryService
+  devtools:
+    add-properties: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/ProductDB
+    username: root
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true

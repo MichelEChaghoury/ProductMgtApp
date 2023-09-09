@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  axon_server:
+    image: "axoniq/axonserver"
+    container_name: axonserver
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    restart: always
+
+  postgres:
+    container_name: "postgresdb"
+    restart: always
+    image: "postgres:15.3"
+    environment:
+      - "POSTGRES_USER=root"
+      - "POSTGRES_PASSWORD=root"
+      - "POSTGRES_DB=ProductDB"
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data: {}
