@@ -1,14 +1,15 @@
-package com.ultims.productmgt.queryservice.service;
-
-import com.ultims.productmgt.queryservice.dto.ProductDto;
-import com.ultims.productmgt.queryservice.entity.Product;
-import com.ultims.productmgt.queryservice.mapper.ProductMapper;
-import com.ultims.productmgt.queryservice.repository.ProductRepository;
-import com.ultims.productmgt.queryservice.shared.exception.NotFoundException;
-import org.springframework.stereotype.Service;
+package com.ultims.productmgt.queryservice.product.service;
 
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
+import com.ultims.productmgt.queryservice.product.dto.ProductDto;
+import com.ultims.productmgt.queryservice.product.entity.Product;
+import com.ultims.productmgt.queryservice.product.mapper.ProductMapper;
+import com.ultims.productmgt.queryservice.product.repository.ProductRepository;
+import com.ultims.productmgt.queryservice.shared.exception.NotFoundException;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -31,16 +32,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto get(UUID productId) {
-
-        if (productId == null) {
+    public ProductDto get(UUID id) {
+        if (id == null) {
             throw new IllegalArgumentException("Invalid Input. Product ID can not be null");
         }
 
         Product product = productRepository
-                .findById(productId)
-                .orElseThrow(() -> new NotFoundException("No Product with ID: " + productId + " was found"));
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("No Product with ID " + id + " was found"));
 
         return productMapper.toDto(product);
     }
+
 }

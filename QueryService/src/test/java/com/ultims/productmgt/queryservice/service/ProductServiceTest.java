@@ -1,11 +1,11 @@
 package com.ultims.productmgt.queryservice.service;
 
-import com.ultims.productmgt.queryservice.dto.ProductDto;
-import com.ultims.productmgt.queryservice.entity.Product;
-import com.ultims.productmgt.queryservice.mapper.ProductMapper;
-import com.ultims.productmgt.queryservice.mapper.ProductMapperImpl;
-import com.ultims.productmgt.queryservice.repository.ProductRepository;
-import com.ultims.productmgt.queryservice.shared.exception.NotFoundException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Optional;
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,11 +13,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.ultims.productmgt.queryservice.product.dto.ProductDto;
+import com.ultims.productmgt.queryservice.product.entity.Product;
+import com.ultims.productmgt.queryservice.product.mapper.ProductMapper;
+import com.ultims.productmgt.queryservice.product.mapper.ProductMapperImpl;
+import com.ultims.productmgt.queryservice.product.repository.ProductRepository;
+import com.ultims.productmgt.queryservice.product.service.ProductService;
+import com.ultims.productmgt.queryservice.product.service.ProductServiceImpl;
+import com.ultims.productmgt.queryservice.shared.exception.NotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
@@ -51,7 +54,7 @@ class ProductServiceTest {
     void shouldReturnNotFoundExceptionWhenNoProductWithGivenIdWasFound() {
         // Given
         UUID productId = UUID.randomUUID();
-        String message = "No Product with ID: " + productId + " was found";
+        String message = "No Product with ID " + productId + " was found";
 
         // When
         NotFoundException exception = assertThrows(NotFoundException.class, () -> underTest.get(productId));

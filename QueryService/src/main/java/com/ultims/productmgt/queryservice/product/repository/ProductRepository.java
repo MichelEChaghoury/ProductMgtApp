@@ -1,12 +1,13 @@
-package com.ultims.productmgt.queryservice.repository;
-
-import com.ultims.productmgt.queryservice.entity.Product;
+package com.ultims.productmgt.queryservice.product.repository;
 
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.ultims.productmgt.queryservice.product.entity.Product;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
+
 }

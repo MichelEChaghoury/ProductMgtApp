@@ -1,4 +1,4 @@
-package com.ultims.productmgt.comandservice.product.route.v1;
+package com.ultims.productmgt.queryservice.product.route.v1;
 
 public abstract class ProductRoute {
 
@@ -10,7 +10,6 @@ public abstract class ProductRoute {
     private static final String BASE_URL = "api" + "/" + VERSION + "/" + RESSOURCE;
     private static final String ID = "{id}";
 
-    public static final String CREATE = BASE_URL;
-    public static final String UPDATE_BY_ID = BASE_URL + "/" + ID;
-    public static final String DELETE_BY_ID = BASE_URL + "/" + ID;
+    public static final String GET_ALL = BASE_URL;
+    public static final String GET_BY_ID = BASE_URL + "/" + ID;
 }
