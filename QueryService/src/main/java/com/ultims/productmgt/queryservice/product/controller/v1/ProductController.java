@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ultims.productmgt.queryservice.product.dto.ProductDto;
 import com.ultims.productmgt.queryservice.product.route.v1.ProductRoute;
+import com.ultims.productmgt.queryservice.product.segregate.query.GetProductByIdQuery;
 import com.ultims.productmgt.queryservice.product.segregate.query.GetProductsQuery;
 
 @RestController
@@ -35,6 +36,12 @@ public class ProductController {
 
     @GetMapping(ProductRoute.GET_BY_ID)
     public ResponseEntity<ProductDto> get(@PathVariable("id") UUID id) {
-        return null;
+        GetProductByIdQuery query = new GetProductByIdQuery(id);
+
+        ProductDto productDto = queryGateway
+                .query(query, ResponseTypes.instanceOf(ProductDto.class))
+                .join();
+
+        return ResponseEntity.ok(productDto);
     }
 }
